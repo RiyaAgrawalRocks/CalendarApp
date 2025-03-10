@@ -129,6 +129,7 @@
     justify-content: center;
     align-items: center;
     row-gap: 2rem;
+    display: none;
 }
 
 .time-input{
@@ -137,11 +138,11 @@
 }
 
 .event-popup-time{
-    width: clamp(4rem, 4cqi, 7rem);
+    width: clamp(7rem, 4cqi, 9rem);
     background-color: #00a3ff;
     color: #fff;
     font-family: "Bebas Nene", sans-serif;
-    font-size: clamp(1.5rem, 1.5cqi, 2.2rem);
+    font-size: clamp(0.5rem, 1.5cqi, 2.2rem);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -152,6 +153,63 @@
 .time-input input[type="number"]::-webkit-outer-spin-button,
 .time-input input[type="number"]::-webkit-inner-spin-button{
     appearance: none;
+}
+
+.event-popup textarea{
+    width: clamp(15rem, 15cqi, 25rem);
+    aspect-ratio: 5 / 2;
+    resize: none;
+    background-color: #0f1319;
+    border: none;
+    padding: 1rem;
+    border-radius: .5rem;
+    color: #78879e;
+    transition: border 0.5s;
+}
+
+.event-popup textarea:focus{
+border: 0.1rem solid #00a3ff;
+}
+
+.event-popup textarea::placeholder {
+ font-size: clamp(1rem, .8cqi, 1.2rem);   
+ color: #78879e;
+}
+
+.event-popup textarea:focus::placeholder{
+    color: transparent;
+}
+
+.event-popup-btn{
+    width: clamp(15rem, 15cqi, 25rem);
+    height: 4rem;
+    background-color: #ef9011;
+    color:white;
+    font-family: "Bebas Neue", sans-serif;
+    font-size: clamp(1.5rem, 1.5cqi, 2.2rem);
+    letter-spacing: 0.1rem;
+    border: none;
+    box-shadow: 0 0 1.5rem 1rem rgba(239,144,17,0.2);
+    cursor: pointer;
+    padding-top: 0.4rem;
+}
+
+.event-popup-btn:active{
+    transform: translate(0.1rem);
+}
+
+.close-event-popup{
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.close-event-popup i{
+    font-size: 2.5rem;
+    color: #fff;
 }
 
 .time-input input {
@@ -189,13 +247,16 @@
 .event-date{
     font-size: clamp(1rem, 1cqi, 1.2rem);
     color: #ddd;
+    padding-left: 2rem;
+    padding-top: 1rem;
 }
 
 .event-time{
     font-size: clamp(1.3rem, 1cqi, 1.6rem);
-    line-height: 4rem;
+    line-height: 2.5rem;
     font-weight: bold;
     color: #fff;
+    padding-left: 4rem;
 }
 
 .event-text{
@@ -203,7 +264,7 @@
     line-height: 2rem;
     color: white;
     width: 75%;
-    padding: 0 1rem 0 1rem;
+    padding-left: 5rem;
     overflow-wrap: break-word;
 }
 
