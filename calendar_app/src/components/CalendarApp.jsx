@@ -6,6 +6,9 @@ const CalendarApp = () => {
     const currentDate = new Date()
     const [currentMonth, setCurrentMonth]=useState(currentDate.getMonth())
     const [currentYear, setCurrentYear]=useState(currentDate.getFullYear())
+    const [selectedDate, setSelectedDate] = useState(currentDate)
+    const [showEventPopup, setShowEventPopup] = useState(false)
+
     const daysInMonth = new Date(currentYear, currentMonth+1, 0).getDate()
     const firstDayOfMonth= new Date(currentYear, currentMonth,1).getDay()
 
@@ -18,6 +21,16 @@ const CalendarApp = () => {
     setCurrentMonth((prevMonth) => (prevMonth === 11 ? 0: prevMonth + 1))
     setCurrentYear((prevYear) => (currentMonth === 11 ? prevYear + 1 : prevYear))
   }
+
+const handleDayClick = (day) => {
+    const clickedDate = new Date(currentYear, currentMonth, day)
+    const today = new Date()
+
+    if(clickedDate >= today){
+        setSelectedDate(clickedDate)
+        setShowEventPopup(true)
+    }
+}
 
   return (
     <div className="calendar-app">
@@ -37,11 +50,13 @@ const CalendarApp = () => {
             <div className="days">
                 {[...Array(firstDayOfMonth).keys()].map((_, index) => (<span key={`empty-${index}`} />
             ))}
-            {[...Array(daysInMonth).keys()].map((day)=> (<span key={day+1} className={day +1 === currentDate.getDate() && currentMonth===currentDate.getMonth() && currentYear===currentDate.getFullYear() ? 'current-day' : ''}>{day+1}</span>
-        ))}
+            {[...Array(daysInMonth).keys()].map((day)=> (<span key={day+1} className={day +1 === currentDate.getDate() && currentMonth===currentDate.getMonth() && currentYear===currentDate.getFullYear() ? 'current-day' : ''}
+                onClick={() => handleDayClick(day + 1)}>{day+1}</span>
+             ))}
             </div>
         </div>
         <div className="events">
+            {showEventPopup && (
             <div className="event-popup">
                 <div className="time-input">
                     <div className="event-popup-time">Time</div>
@@ -50,10 +65,14 @@ const CalendarApp = () => {
                 </div>
                 <textarea placeholder="Enter Event Text (Maximum 60 characters)"></textarea>
                 <button className="event-popup-btn">Add Event</button>
-                <button className="close-event-popup">
+                <button className="close-event-popup" onClick={() => setShowEventPopup(false)}>
                  <i className="bx bx-x"></i>   
                 </button>
             </div>
+            )}
+
+    
+            
                 <div className="event">
                     <div className="event-data-wrapper">
                         <div className="event-date">May 15, 2024</div>
